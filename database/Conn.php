@@ -7,10 +7,24 @@ use PDOException;
 
 class Conn
 {
-    public $que;
+    /**
+     * @var string $dbname
+     */
     public $dbname = 'quantox_calendar';
+
+    /**
+     * @var string $dbuser
+     */
     public $dbuser = 'root';
+
+    /**
+     * @var string $dbpassword
+     */
     public $dbpassword = '';
+
+    /**
+     * @var string $pdo
+     */
     public $pdo = '';
 
     public function __construct()
@@ -22,13 +36,4 @@ class Conn
             die();
         }
     }
-
-    // abstract protected function query($query);
 }
-
-// new PDO(
-//     "mysql:dbname={$_ENV['DB_NAME']};host={$_ENV['DB_HOST']}",
-//     "{$_ENV['DB_USER']}",
-//     "{$_ENV['DB_PASSWORD']}",
-//     [PDO::ERRMODE_EXCEPTION]
-// );
