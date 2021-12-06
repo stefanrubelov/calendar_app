@@ -4,7 +4,7 @@ namespace App\user;
 
 use App\Router;
 use App\Session;
-use App\Validator;
+use App\Validate;
 use database\Conn;
 
 
@@ -38,7 +38,7 @@ class LoginUser extends Conn
      */
     public function query(): void
     {
-        if (Validator::empty($this->email, $this->password)) {
+        if (Validate::empty($this->email, $this->password)) {
             $result = $this->pdo->query("SELECT * FROM users WHERE email='" . $this->email . "'");
             $result = $result->fetch();
             if ($result) {

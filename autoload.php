@@ -10,7 +10,7 @@ require __DIR__ . '\assets\functions.php';
 require_once __DIR__ . '\database\Conn.php';
 require_once __DIR__ . '\App\Router.php';
 require_once __DIR__ . '\App\Request.php';
-require_once __DIR__ . '\App\Validator.php';
+require_once __DIR__ . '\App\Validate.php';
 require_once __DIR__ . '\App\Session.php';
 require_once __DIR__ . '\App\user\AddUser.php';
 require_once __DIR__ . '\App\user\LoginUser.php';

@@ -5,6 +5,7 @@ use App\Session;
 $empty_fields_error = null;
 $email_error = null;
 $login_error = null;
+$register_success = null;
 if (Session::get('empty_fields_error')) {
     $empty_fields_error = Session::get('empty_fields_error');
 }
@@ -13,6 +14,9 @@ if (Session::get('email_error')) {
 }
 if (Session::get('login_error')) {
     $login_error = Session::get('login_error');
+}
+if (Session::get('register_success')) {
+    $register_success = Session::get('register_success');
 }
 Session::unset();
 ?>
@@ -42,6 +46,12 @@ Session::unset();
     if ($login_error != '') { ?>
         <div class="alert alert-danger" role="alert">
             <?= $login_error ?>
+        </div>
+    <?php } ?>
+    <?php
+    if ($register_success != '') { ?>
+        <div class="alert alert-success" role="alert">
+            <?= $register_success ?>
         </div>
     <?php } ?>
     <div class="mb-3 d-flex justify-content-between">

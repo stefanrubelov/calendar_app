@@ -8,16 +8,13 @@ class Session
      * Set new session
      * @return string
      */
-    public static function put($session_name, $session_value): string
+    public static function put($session_name, $session_value): void
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
         if (!isset($_SESSION[$session_name]) && empty($_SESSION[$session_name])) {
             $_SESSION[$session_name] = $session_value;
-        } else {
-            return 'session already in use';
-            die();
         }
     }
 
@@ -25,7 +22,7 @@ class Session
      * Get session value
      * @return string
      */
-    public static function get($session_name): string
+    public static function get($session_name): string|bool
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

@@ -23,7 +23,7 @@ class Conn
     public $dbpassword = '';
 
     /**
-     * @var string $pdo
+     * @var object $pdo
      */
     public $pdo = '';
 

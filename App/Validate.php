@@ -5,7 +5,7 @@ namespace App;
 use App\Session;
 use database\Conn;
 
-class Validator extends Conn
+class Validate extends Conn
 {
     /**
      * Checks if given fields are empty

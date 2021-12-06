@@ -12,4 +12,3 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 $new_user = new AddUser($name, $email, $password);
 $new_user->query();
-Router::header('/login');

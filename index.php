@@ -22,7 +22,7 @@ use App\Request;
 
 <body class="bg-light bg-gradient">
     <div class="d-flex flex-column">
-        <h1 class="mx-auto mt-5 fs-1">Quantox Calendar</h1>
+        <h1 class="mx-auto mt-5 fs-1"><a href="/" class="text-reset text-decoration-none">Quantox Calendar</a></h1>
         <div class="row mt-5 pt-5 d-flex mx-auto w-25">
             <?php
             require Router::load(ROUTES_FILE)->redirect(Request::uri());

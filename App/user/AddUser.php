@@ -3,7 +3,8 @@
 namespace App\user;
 
 use App\Router;
-use App\Validator;
+use App\Session;
+use App\Validate;
 use database\Conn;
 
 
@@ -46,7 +47,7 @@ class AddUser extends Conn
      */
     public function query($query = 'INSERT INTO users (name, email, password) values(:name, :email, :password)'): void
     {
-        if (Validator::empty($this->name, $this->email, $this->password) && Validator::emailUnique($this->email)) {
+        if (Validate::empty($this->name, $this->email, $this->password) && Validate::emailUnique($this->email)) {
             $stmt = $this->pdo->prepare($query);
             $stmt->execute(
                 [
@@ -55,8 +56,12 @@ class AddUser extends Conn
                     'password' => password_hash($this->password, PASSWORD_DEFAULT)
                 ]
             );
+            Session::put('register_success', 'You registered successfully, you can log in now.');
+            Router::header('/login');
+            return;
         } else {
-            Router::header('/register');
+            Router::header('/');
+            return;
         }
     }
 }
