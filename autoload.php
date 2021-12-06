@@ -1,21 +1,16 @@
 <?php
 
-use App\Router;
 
-require __DIR__ . '\config.php';
-// require __DIR__ . '/routes.php';
-// require __DIR__ . '\database\Conn.php';
-
+//FILES
+require __DIR__ . '\assets\config.php';
+require __DIR__ . '\assets\functions.php';
 
 
+//CLASSES
+require_once __DIR__ . '\database\Conn.php';
 require_once __DIR__ . '\App\Router.php';
-
-
-
-function dd($val)
-{
-    echo "<pre>";
-    var_dump($val);
-    echo "</pre>";
-    die();
-}
+require_once __DIR__ . '\App\Request.php';
+require_once __DIR__ . '\App\Validator.php';
+require_once __DIR__ . '\App\Session.php';
+require_once __DIR__ . '\App\user\AddUser.php';
+require_once __DIR__ . '\App\user\LoginUser.php';

@@ -5,24 +5,30 @@ namespace database;
 use PDO;
 use PDOException;
 
-abstract class Conn
+class Conn
 {
     public $que;
-    private $dbname = 'quantox_calendar';
-    private $host = 'localhost';
-    private $dbuser = 'root';
-    private $password = '';
+    public $dbname = 'quantox_calendar';
+    public $dbuser = 'root';
+    public $dbpassword = '';
     public $pdo = '';
 
     public function __construct()
     {
         try {
-            $this->pdo = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->dbname, $this->dbuser, $this->password, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
+            $this->pdo = new PDO("mysql:dbname=" . $this->dbname . ';host=localhost;', $this->dbuser, $this->dbpassword);
         } catch (PDOException $e) {
             echo 'Something went wrong! Try again later.';
             die();
         }
     }
 
-    abstract protected function query($query);
+    // abstract protected function query($query);
 }
+
+// new PDO(
+//     "mysql:dbname={$_ENV['DB_NAME']};host={$_ENV['DB_HOST']}",
+//     "{$_ENV['DB_USER']}",
+//     "{$_ENV['DB_PASSWORD']}",
+//     [PDO::ERRMODE_EXCEPTION]
+// );
