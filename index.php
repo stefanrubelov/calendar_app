@@ -1,11 +1,10 @@
 <?php
-
 require_once __DIR__ . '\autoload.php';
 
 use App\Router;
 use App\Request;
-?>
 
+?>
 <!doctype html>
 <html lang="en">
 

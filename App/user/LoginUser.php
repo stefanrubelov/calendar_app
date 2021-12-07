@@ -34,6 +34,7 @@ class LoginUser extends Conn
 
     /**
      * Logs in the user
+     * 
      * @return void
      */
     public function query(): void
@@ -44,11 +45,13 @@ class LoginUser extends Conn
             if ($result) {
                 $password = $result['password'];
                 $email = $result['email'];
+                $id = $result['id'];
             } else {
                 Session::put('login_error', 'Wrong credentials.');
                 Router::header('/login');
             }
             if ($password == password_verify($this->password, $password) && $email == $this->email) {
+                Session::put('user_id', "$id");
                 Router::header('/calendar');
             } else {
                 Session::put('login_error', 'Wrong credentials.');

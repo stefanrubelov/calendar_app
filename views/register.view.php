@@ -1,16 +1,23 @@
 <?php
 
+use App\Auth;
+use App\Router;
 use App\Session;
+
+if (Auth::check()) {
+    Router::header('/calendar');
+}
 
 $empty_fields_error = null;
 $email_error = null;
+
 if (Session::get('empty_fields_error')) {
     $empty_fields_error = Session::get('empty_fields_error');
 }
 if (Session::get('email_error')) {
     $email_error = Session::get('email_error');
 }
-Session::unset();
+Session::destroy();
 ?>
 
 <form action="actions/user.add.php" method="POST">

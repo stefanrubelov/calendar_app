@@ -6,7 +6,10 @@ class Session
 {
     /**
      * Set new session
-     * @return string
+     * @param string $session_name Session title to be set
+     * @param string $session_value Session value to be set
+     * 
+     * @return void
      */
     public static function put($session_name, $session_value): void
     {
@@ -20,7 +23,9 @@ class Session
 
     /**
      * Get session value
-     * @return string
+     * @param string $session_name Session title to be get(got?)
+     * 
+     * @return string|bool
      */
     public static function get($session_name): string|bool
     {
@@ -35,10 +40,15 @@ class Session
     }
 
     /**
-     * Unset session
+     * Unset all the sessions
+     *
+     * @return void
      */
-    public static function unset()
+    public static function destroy(): void
     {
-        session_unset();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        session_destroy();
     }
 }

@@ -1,2 +1,3 @@
 <?php
-echo 'calendar';
+
+require 'views/calendar.view.php';

@@ -5,7 +5,8 @@ namespace App;
 class Request
 {
     /**
-     * Outputs the uri
+     * Outputs the page uri
+     * 
      * @return string
      */
     public static function uri(): string
