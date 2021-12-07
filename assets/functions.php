@@ -8,11 +8,11 @@ function dd($val)
     die();
 }
 
-function checkIfPostRequest()
+function redirectIfNotPost($url = '/')
 {
     if ($_SERVER['REQUEST_METHOD'] != "POST") {
         header_remove();
-        header("Location: /");
+        header("Location: $url");
         die();
     }
 }

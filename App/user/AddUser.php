@@ -42,6 +42,7 @@ class AddUser extends Conn
 
     /**
      * Saves new user to database
+     * @param string $query
      * 
      * @return void
      */
@@ -60,7 +61,7 @@ class AddUser extends Conn
             Router::header('/login');
             return;
         } else {
-            Router::header('/');
+            Router::header('/register');
             return;
         }
     }

@@ -1,11 +1,10 @@
 <?php
 
-use App\Validator;
 use App\user\LoginUser;
 
 require '..\autoload.php';
 
-checkIfPostRequest();
+redirectIfNotPost();
 
 $email = $_POST['email'];
 $password = $_POST['password'];

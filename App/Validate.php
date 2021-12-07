@@ -5,6 +5,9 @@ namespace App;
 use App\Session;
 use database\Conn;
 
+/**
+ * Validator class to validate given inputs
+ */
 class Validate extends Conn
 {
     /**
@@ -26,6 +29,7 @@ class Validate extends Conn
 
     /**
      * Checks if given email is unique (from users table)
+     * @param string $email Email address to be validated
      * 
      * @return bool
      */
@@ -43,7 +47,7 @@ class Validate extends Conn
 
     /**
      * Checks if the given email is in the correct format
-     * 
+     * @param string $email Email address to be validated
      * @return bool
      */
     public static function emailFormat($email): bool

@@ -1,11 +1,10 @@
 <?php
 
-use App\Router;
 use App\user\AddUser;
 
 require '..\autoload.php';
 
-checkIfPostRequest();
+redirectIfNotPost();
 
 $name = $_POST['name'];
 $email = $_POST['email'];

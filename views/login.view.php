@@ -1,11 +1,18 @@
 <?php
 
+use App\Auth;
+use App\Router;
 use App\Session;
+
+if (Auth::check()) {
+    Router::header('/calendar');
+}
 
 $empty_fields_error = null;
 $email_error = null;
 $login_error = null;
 $register_success = null;
+
 if (Session::get('empty_fields_error')) {
     $empty_fields_error = Session::get('empty_fields_error');
 }
@@ -18,7 +25,8 @@ if (Session::get('login_error')) {
 if (Session::get('register_success')) {
     $register_success = Session::get('register_success');
 }
-Session::unset();
+Session::destroy();
+
 ?>
 
 <form action="actions/user.login.php" method="POST">
@@ -31,25 +39,25 @@ Session::unset();
         <input type="password" class="form-control" id="password" name="password">
     </div>
     <?php
-    if ($empty_fields_error != '') { ?>
+    if ($empty_fields_error != null) { ?>
         <div class="alert alert-danger" role="alert">
             <?= $empty_fields_error ?>
         </div>
     <?php } ?>
     <?php
-    if ($email_error != '') { ?>
+    if ($email_error != null) { ?>
         <div class="alert alert-danger" role="alert">
             <?= $email_error ?>
         </div>
     <?php } ?>
     <?php
-    if ($login_error != '') { ?>
+    if ($login_error != null) { ?>
         <div class="alert alert-danger" role="alert">
             <?= $login_error ?>
         </div>
     <?php } ?>
     <?php
-    if ($register_success != '') { ?>
+    if ($register_success != null) { ?>
         <div class="alert alert-success" role="alert">
             <?= $register_success ?>
         </div>

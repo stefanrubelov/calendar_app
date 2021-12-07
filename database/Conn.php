@@ -27,6 +27,10 @@ class Conn
      */
     public $pdo = '';
 
+    /**
+     * Connection constructor
+     * Tries to establish connection to the database
+     */
     public function __construct()
     {
         try {
