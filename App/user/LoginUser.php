@@ -51,7 +51,7 @@ class LoginUser extends Conn
                 Router::header('/login');
             }
             if ($password == password_verify($this->password, $password) && $email == $this->email) {
-                Session::put('user_id', "$id");
+                Session::put('user_id', $id);
                 Router::header('/calendar');
             } else {
                 Session::put('login_error', 'Wrong credentials.');

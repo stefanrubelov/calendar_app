@@ -1,13 +1,5 @@
 <?php
 
-function dd($val)
-{
-    echo "<pre>";
-    var_dump($val);
-    echo "</pre>";
-    die();
-}
-
 function redirectIfNotPost($url = '/')
 {
     if ($_SERVER['REQUEST_METHOD'] != "POST") {
@@ -15,4 +7,12 @@ function redirectIfNotPost($url = '/')
         header("Location: $url");
         die();
     }
+}
+
+function dd($val)
+{
+    echo "<pre>";
+    var_dump($val);
+    echo "</pre>";
+    die();
 }

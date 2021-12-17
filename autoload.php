@@ -13,5 +13,6 @@ require_once __DIR__ . '\App\Request.php';
 require_once __DIR__ . '\App\Router.php';
 require_once __DIR__ . '\App\Session.php';
 require_once __DIR__ . '\App\Validate.php';
+require_once __DIR__ . '\App\Calendar.php';
 require_once __DIR__ . '\App\user\AddUser.php';
 require_once __DIR__ . '\App\user\LoginUser.php';

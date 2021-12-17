@@ -40,7 +40,7 @@ class Session
     }
 
     /**
-     * Unset all the sessions
+     * Unset all the sessions 
      *
      * @return void
      */

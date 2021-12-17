@@ -5,11 +5,12 @@ use App\Router;
 
 if (!Auth::check()) {
     Router::header('/login');
+    die();
 } else {
-    echo Auth::id();
+    dd(Auth::id());
 }
 ?>
 
-<form action="logout" method="post">
-    <button type="submit" class="btn btn-outline-primary">Logout</button>
-</form>
+<div id="calendar" class="text-center">
+    asdasdasd
+</div>

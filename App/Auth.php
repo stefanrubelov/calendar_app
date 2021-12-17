@@ -25,7 +25,7 @@ class Auth
      * 
      * @return string|int
      */
-    public static function id(): string|int
+    public static function id(): int
     {
         return Session::get('user_id');
     }
@@ -40,8 +40,12 @@ class Auth
         $conn = new Conn;
         $id = new Auth;
         $id = $id->id();
-        $result = $conn->pdo->query("SELECT name FROM users WHERE id='" . $id . "'");
-        $name = $result->fetch()['name'];
-        return $name;
+        if ($id) {
+            $result = $conn->pdo->query("SELECT name FROM users WHERE id='" . $id . "'");
+            $name = $result->fetch()['name'];
+            return $name;
+        } else {
+            return 'unknown';
+        }
     }
 }
