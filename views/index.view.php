@@ -1,7 +1,7 @@
 <?php
 
-use App\Auth;
-use App\Router;
+use App\Core\Auth;
+use App\Core\Router;
 
 if (Auth::check()) {
     Router::header('/calendar');

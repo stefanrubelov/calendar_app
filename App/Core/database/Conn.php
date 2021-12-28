@@ -1,6 +1,6 @@
 <?php
 
-namespace database;
+namespace App\Core\database;
 
 use PDO;
 use PDOException;
@@ -29,7 +29,7 @@ class Conn
 
     /**
      * Connection constructor
-     * Tries to establish connection to the database
+     * Tries to establish connection tos the database
      */
     public function __construct()
     {
@@ -41,3 +41,13 @@ class Conn
         }
     }
 }
+
+
+
+// private static $instance = NULL;
+// self::$instance = new PDO(
+    //     "mysql:dbname=" . $this->dbname . ';host=localhost;',
+    //     $this->dbuser,
+    //     $this->dbpassword,
+    //     [PDO::ERRMODE_EXCEPTION, PDO::PARAM_EVT_EXEC_POST]
+// );

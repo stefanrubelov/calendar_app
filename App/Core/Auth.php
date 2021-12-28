@@ -1,11 +1,17 @@
 <?php
 
-namespace App;
+namespace App\Core;
 
-use database\Conn;
+use App\Core\database\Conn;
+use App\Controllers\Controller;
 
-class Auth
+class Auth extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct(new Conn(), new Request(), new Router(), new Session(), new Validate());
+    }
+
     /**
      * Check if user_id is set in session (if user is logged in)
      * 
@@ -33,19 +39,17 @@ class Auth
     /**
      * returns logged users name
      * 
-     * @return string
      */
-    public static function name(): string
+    public static function name()
     {
         $conn = new Conn;
-        $id = new Auth;
-        $id = $id->id();
+        $id = Session::get('user_id');
         if ($id) {
             $result = $conn->pdo->query("SELECT name FROM users WHERE id='" . $id . "'");
             $name = $result->fetch()['name'];
             return $name;
         } else {
-            return 'unknown';
+            return 'Unknown';
         }
     }
 }

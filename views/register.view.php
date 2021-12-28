@@ -1,23 +1,24 @@
 <?php
 
-use App\Auth;
-use App\Router;
-use App\Session;
+use App\Core\Auth;
+use App\Core\Router;
+use App\Core\Session;
 
 if (Auth::check()) {
     Router::header('/calendar');
 }
 
-$empty_fields_error = null;
-$email_error = null;
+$session_error_message = null;
+$session_success_message = null;
 
-if (Session::get('empty_fields_error')) {
-    $empty_fields_error = Session::get('empty_fields_error');
+if (Session::get('error')) {
+    $session_error_message = Session::get('error');
 }
-if (Session::get('email_error')) {
-    $email_error = Session::get('email_error');
+if (Session::get('success')) {
+    $session_success_message = Session::get('success');
 }
 Session::destroy();
+
 ?>
 
 <form action="actions/user.add.php" method="POST">

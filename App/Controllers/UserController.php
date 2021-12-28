@@ -1,14 +1,16 @@
 <?php
 
-namespace App\user;
+namespace App\Controllers;
 
-use App\Router;
-use App\Session;
-use App\Validate;
-use database\Conn;
+use App\Core\Auth;
+use App\Core\Router;
+use App\Core\Request;
+use App\Core\Session;
+use App\Core\Validate;
+use App\Core\database\Conn;
+use App\Controllers\Controller;
 
-
-class AddUser extends Conn
+class UserController extends Controller
 {
     /**
      *@var string $name 
@@ -34,7 +36,7 @@ class AddUser extends Conn
      */
     public function __construct($name, $email, $password)
     {
-        parent::__construct();
+        parent::__construct(new Conn(), new Request(), new Router(), new Session(), new Validate(), new Auth());
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
@@ -48,8 +50,9 @@ class AddUser extends Conn
      */
     public function query($query = 'INSERT INTO users (name, email, password) values(:name, :email, :password)'): void
     {
-        if (Validate::empty($this->name, $this->email, $this->password) && Validate::emailUnique($this->email)) {
-            $stmt = $this->pdo->prepare($query);
+        // if (Validate::empty($this->name, $this->email, $this->password) && Validate::emailUnique($this->email)) {
+        if ($this->validate->empty($this->name, $this->email, $this->password) && $this->validate->emailUnique($this->email)) {
+            $stmt = $this->conn->pdo->prepare($query);
             $stmt->execute(
                 [
                     'name' => $this->name,
@@ -57,7 +60,7 @@ class AddUser extends Conn
                     'password' => password_hash($this->password, PASSWORD_DEFAULT)
                 ]
             );
-            Session::put('register_success', 'You registered successfully, you can log in now.');
+            Session::put('success', 'You registered successfully, you can log in now.');
             Router::header('/login');
             return;
         } else {

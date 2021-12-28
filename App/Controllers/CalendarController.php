@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Controllers;
 
 use PDO;
-use database\Conn;
 use Exception;
-use Throwable;
+use App\Core\Validate;
+use App\Controllers\Controller;
 
-class Calendar extends Conn
+class CalendarController extends Controller
 {
     /**
      * @var string $title, event title
@@ -17,7 +17,6 @@ class Calendar extends Conn
     /**
      * @var string $start_date
      */
-
     private $start_date;
 
     /**
@@ -40,7 +39,6 @@ class Calendar extends Conn
      */
     public function __construct()
     {
-        parent::__construct();
     }
 
 
@@ -60,22 +58,22 @@ class Calendar extends Conn
         $this->start_date = $start_date;
         $this->end_date = $end_date;
 
-        if (Validate::empty($this->title, $this->start_date, $this->end_date)) {
-            $query = 'INSERT INTO events (user_id, title, start_date, end_date) values (:user_id, :title, :start_date, :end_date)';
-            $stmt = $this->pdo->prepare($query);
-            try {
-                $stmt->execute(
-                    [
-                        'user_id' => $this->user_id,
-                        'title' => $this->title,
-                        'start_date' => $this->start_date,
-                        'end_date' => $this->end_date,
-                    ]
-                );
-            } catch (Exception $e) {
-                //
-            };
-        }
+        // if (Validate::empty($this->title, $this->start_date, $this->end_date)) {
+        //     $query = 'INSERT INTO events (user_id, title, start_date, end_date) values (:user_id, :title, :start_date, :end_date)';
+        //     $stmt = $this->pdo->prepare($query);
+        //     try {
+        //         $stmt->execute(
+        //             [
+        //                 'user_id' => $this->user_id,
+        //                 'title' => $this->title,
+        //                 'start_date' => $this->start_date,
+        //                 'end_date' => $this->end_date,
+        //             ]
+        //         );
+        //     } catch (Exception $e) {
+        //         //
+        //     };
+        // }
     }
 
     /**
@@ -94,16 +92,16 @@ class Calendar extends Conn
     public function deleteEvent($event_id): void
     {
         $this->event_id = $event_id;
-        if (Validate::empty($this->event_id)) {
-            $query = "DELETE FROM events WHERE id=:event_id";
-            $stmt = $this->pdo->prepare($query);
-            $stmt->bindParam(':event_id', $this->event_id, PDO::PARAM_INT);
-            try {
-                $stmt->execute();
-            } catch (Exception $e) {
-                //
-            };
-        }
+        // if (Validate::empty($this->event_id)) {
+        //     $query = "DELETE FROM events WHERE id=:event_id";
+        //     $stmt = $this->pdo->prepare($query);
+        //     $stmt->bindParam(':event_id', $this->event_id, PDO::PARAM_INT);
+        //     try {
+        //         $stmt->execute();
+        //     } catch (Exception $e) {
+        //         //
+        //     };
+        // }
     }
 
     /**

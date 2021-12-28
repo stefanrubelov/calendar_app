@@ -1,29 +1,21 @@
 <?php
 
-use App\Auth;
-use App\Router;
-use App\Session;
+use App\Core\Auth;
+use App\Core\Router;
+use App\Core\Session;
 
 if (Auth::check()) {
     Router::header('/calendar');
 }
 
-$empty_fields_error = null;
-$email_error = null;
-$login_error = null;
-$register_success = null;
+$session_error_message = null;
+$session_success_message = null;
 
-if (Session::get('empty_fields_error')) {
-    $empty_fields_error = Session::get('empty_fields_error');
+if (Session::get('error')) {
+    $session_error_message = Session::get('error');
 }
-if (Session::get('email_error')) {
-    $email_error = Session::get('email_error');
-}
-if (Session::get('login_error')) {
-    $login_error = Session::get('login_error');
-}
-if (Session::get('register_success')) {
-    $register_success = Session::get('register_success');
+if (Session::get('success')) {
+    $session_success_message = Session::get('success');
 }
 Session::destroy();
 
@@ -39,27 +31,15 @@ Session::destroy();
         <input type="password" class="form-control" id="password" name="password">
     </div>
     <?php
-    if ($empty_fields_error != null) { ?>
+    if ($session_error_message != null) { ?>
         <div class="alert alert-danger" role="alert">
-            <?= $empty_fields_error ?>
+            <?= $session_error_message ?>
         </div>
     <?php } ?>
     <?php
-    if ($email_error != null) { ?>
-        <div class="alert alert-danger" role="alert">
-            <?= $email_error ?>
-        </div>
-    <?php } ?>
-    <?php
-    if ($login_error != null) { ?>
-        <div class="alert alert-danger" role="alert">
-            <?= $login_error ?>
-        </div>
-    <?php } ?>
-    <?php
-    if ($register_success != null) { ?>
+    if ($session_success_message != null) { ?>
         <div class="alert alert-success" role="alert">
-            <?= $register_success ?>
+            <?= $session_success_message ?>
         </div>
     <?php } ?>
     <div class="mb-3 d-flex justify-content-between">

@@ -1,9 +1,12 @@
 <?php
-require_once __DIR__ . '\autoload.php';
 
-use App\Auth;
-use App\Router;
-use App\Request;
+// require_once __DIR__ . '\assets\config.php';
+// require_once __DIR__ . '\assets\functions.php';
+require_once __DIR__ . '\vendor\autoload.php';
+
+use App\Core\Auth;
+use App\Core\Router;
+use App\Core\Request;
 
 ?>
 <!doctype html>
@@ -17,20 +20,19 @@ use App\Request;
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <title>Quantox Calendar</title>
-
 </head>
 
 <body class="bg-light" style="background-color: #e3f2fd;">
     <div class="d-flex flex-column">
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid d-flex justify-content-between m-0 p-0">
-                <a class="navbar-brand mx-5" href="/">Quantox Calendar</a>
+                <a class="navbar-brand mx-5 px-5" href="/">Quantox Calendar</a>
                 <?php if (Request::uri() == 'calendar') { ?>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse w-100 d-flex justify-content-end mx-5" id="navbarNavDropdown">
-                        <ul class="navbar-nav">
+                        <ul class="navbar-nav me-5">
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     <?= Auth::name() ?>
@@ -38,7 +40,7 @@ use App\Request;
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                     <li class="dropdown-item">
                                         <form action="logout" method="post" class="mx-auto text-center">
-                                            <button type="submit" class="btn btn-link text-decoration-none text-center mx-auto">Logout</button>
+                                            <button type="submit" class="btn btn-link text-decoration-none text-center">Logout</button>
                                         </form>
                                     </li>
                                 </ul>
@@ -50,7 +52,7 @@ use App\Request;
         </nav>
         <div class="row mt-5 pt-5 d-flex mx-auto w-25">
             <?php
-            require Router::load(ROUTES_FILE)->redirect(Request::uri());
+            require Router::load(ROUTES_FILE)->redirect(Request::uri(), Request::method());
             ?>
 
         </div>

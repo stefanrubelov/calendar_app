@@ -1,9 +1,6 @@
 <?php
 
-use App\Calendar;
+use App\Controllers\CalendarController;
 
-require '..\autoload.php';
-
-
-$new_calendar = new Calendar();
+$new_calendar = new CalendarController();
 $new_calendar->getAllEvents();

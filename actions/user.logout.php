@@ -1,10 +1,9 @@
 <?php
 
-use App\Router;
-use App\Session;
+use App\Core\Router;
+use App\Core\Session;
 
-// require __DIR__ . '\..\autoload.php';
 
-redirectIfNotPost('/calendar');
+// redirectIfNotPost('/calendar');
 Session::destroy();
 Router::header('/');

@@ -1,11 +1,10 @@
 <?php
 
-use App\Calendar;
+use App\Controllers\CalendarController;
 
-require '..\autoload.php';
 
 // dd($_REQUEST);
 $event_id = $_REQUEST['event_id'];
 
-$new_calendar = new Calendar();
+$new_calendar = new CalendarController();
 $new_calendar->deleteEvent($event_id);

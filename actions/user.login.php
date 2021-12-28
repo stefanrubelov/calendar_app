@@ -1,12 +1,12 @@
 <?php
 
-use App\user\LoginUser;
+use App\Controllers\LoginController;
 
-require '..\autoload.php';
 
-redirectIfNotPost();
+// redirectIfNotPost();
+
 
 $email = $_POST['email'];
 $password = $_POST['password'];
-$new_login = new LoginUser($email, $password);
+$new_login = new LoginController($email, $password);
 $new_login->query();

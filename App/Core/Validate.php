@@ -1,21 +1,22 @@
 <?php
 
-namespace App;
+namespace App\Core;
 
-use App\Session;
 use database\Conn;
+use App\Core\Session;
+use App\Controllers\Controller;
 
 /**
  * Validator class to validate given inputs
  */
-class Validate extends Conn
+class Validate
 {
     /**
      * Checks if given fields are empty
      * 
      * @return bool
      */
-    public static function empty(): bool
+    public function empty(): bool
     {
         $fields = func_get_args();
         foreach ($fields as $field) {
@@ -33,7 +34,7 @@ class Validate extends Conn
      * 
      * @return bool
      */
-    public static function emailUnique($email): bool
+    public function emailUnique($email): bool
     {
         $conn = new Conn();
         $result = $conn->pdo->query("SELECT * FROM users WHERE email='" . $email . "'");
@@ -50,7 +51,7 @@ class Validate extends Conn
      * @param string $email Email address to be validated
      * @return bool
      */
-    public static function emailFormat($email): bool
+    public function emailFormat($email): bool
     {
         $conn = new Conn();
         $result = $conn->pdo->query("SELECT * FROM users WHERE email='" . $email . "'");
