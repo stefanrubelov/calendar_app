@@ -17,7 +17,11 @@ class Request
         );
     }
 
-    public static function method()
+    /**
+     * Return the form method
+     * @return string
+     */
+    public static function method(): string
     {
         return $_SERVER['REQUEST_METHOD'];
     }

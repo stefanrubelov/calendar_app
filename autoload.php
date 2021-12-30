@@ -2,8 +2,8 @@
 
 
 //FILES
-require __DIR__ . '\assets\config.php';
-require __DIR__ . '\assets\functions.php';
+// require __DIR__ . '\assets\config.php';
+// require __DIR__ . '\assets\functions.php';
 
 
 //CLASSES
@@ -16,4 +16,4 @@ require __DIR__ . '\assets\functions.php';
 // // require_once __DIR__ . '\App\Controllers\CalendarController.php';
 // require_once __DIR__ . '\App\Controllers\UserController.php';
 // require_once __DIR__ . '\App\Controllers\LoginController.php';
-// require_once __DIR__ . '\App\Core\Validate.php';
+// require_once __DIR__ . '\App\Core\Validate.php'; -->

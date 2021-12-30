@@ -21,7 +21,7 @@ Session::destroy();
 
 ?>
 
-<form action="actions/user.login.php" method="POST">
+<form action="login" method="POST">
     <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input type="email" class="form-control" id="email" name="email">

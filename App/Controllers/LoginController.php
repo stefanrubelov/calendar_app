@@ -7,8 +7,10 @@ use App\Core\Router;
 use App\Core\Request;
 use App\Core\Session;
 use App\Core\Validate;
+use App\Core\Helpers\Str;
 use App\Core\database\Conn;
 use App\Controllers\Controller;
+use App\Core\database\Database;
 
 class LoginController extends Controller
 {
@@ -23,15 +25,21 @@ class LoginController extends Controller
     private $password;
 
     /**
-     * LoginUser constructor
-     * @param string $this->email
-     * @param string $this->password
+     * Class constructor
      */
-    public function __construct($email, $password)
+    public function __construct()
     {
-        parent::__construct(new Conn(), new Request(), new Router(), new Session(), new Validate());
-        $this->email = $email;
-        $this->password = $password;
+        parent::__construct();
+    }
+
+    /**
+     * Returns the login view
+     * 
+     * @return void
+     */
+    public function index(): void
+    {
+        require_once 'views/login.view.php';
     }
 
     /**
@@ -39,28 +47,40 @@ class LoginController extends Controller
      * 
      * @return void
      */
-    public function query(): void
+    public function login(): void
     {
+        $this->email = $_POST['email'];
+        $this->password = $_POST['password'];
         if ($this->validate->empty($this->email, $this->password)) {
-            $result = $this->conn->pdo->query("SELECT * FROM users WHERE email='" . $this->email . "'");
-            $result = $result->fetch();
-            if ($result) {
-                $password = $result['password'];
-                $email = $result['email'];
-                $id = $result['id'];
+            $user = $this->database->getUser($this->email);
+            if ($user) {
+                $password = $user['password'];
+                $email = $user['email'];
+                $id = $user['id'];
             } else {
-                Session::put('error', 'Wrong credentials.');
+                $this->session->put('error', 'Wrong credentials.');
                 Router::header('/login');
             }
-            if ($password == password_verify($this->password, $password) && $email == $this->email) {
-                Session::put('user_id', $id);
+            if ($this->validate->passwordHash($this->password, $password) && $email == $this->email) {
+                $this->session->put('user_id', $id);
                 Router::header('/calendar');
             } else {
-                Session::put('error', 'Wrong credentials.');
+                $this->session->put('error', 'Wrong credentials.');
                 Router::header('/login');
             }
         } else {
             Router::header('/login');
         }
+    }
+
+    /**
+     * Logs out the user
+     * 
+     * @return void
+     */
+    public function logout(): void
+    {
+        Session::destroy();
+        Router::header('/');
     }
 }

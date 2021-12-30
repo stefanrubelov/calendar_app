@@ -3,8 +3,6 @@
 namespace App\Controllers;
 
 use PDO;
-use Exception;
-use App\Core\Validate;
 use App\Controllers\Controller;
 
 class CalendarController extends Controller
@@ -35,12 +33,20 @@ class CalendarController extends Controller
     private $event_id;
 
     /**
-     * Calendar (event) constructor
+     * Class constructor
      */
     public function __construct()
     {
+        parent::__construct();
     }
-
+    /**
+     * returns the calendar view
+     * @return void
+     */
+    public function index(): void
+    {
+        require 'views/calendar.view.php';
+    }
 
     /**
      * Save new event to database
@@ -50,13 +56,13 @@ class CalendarController extends Controller
      *
      * @return void
      */
-    public function addEvent($title, $start_date, $end_date): void
+    public function add(): void
     {
         $this->user_id = 11;
-        // $this->user_id = Auth::id();
-        $this->title = $title;
-        $this->start_date = $start_date;
-        $this->end_date = $end_date;
+
+        $this->title = $_REQUEST['title'];
+        $this->start_date = $_REQUEST['start_date'];
+        $this->end_date = $_REQUEST['end_date'];
 
         // if (Validate::empty($this->title, $this->start_date, $this->end_date)) {
         //     $query = 'INSERT INTO events (user_id, title, start_date, end_date) values (:user_id, :title, :start_date, :end_date)';
@@ -80,7 +86,7 @@ class CalendarController extends Controller
      * Update existing event in database
      * @return void
      */
-    public function editEvent(): void
+    public function update(): void
     {
     }
 
@@ -106,7 +112,7 @@ class CalendarController extends Controller
 
     /**
      * Return all events from database
-     * @return 
+     * @return json
      */
     public function getAllEvents()
     {

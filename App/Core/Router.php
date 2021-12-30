@@ -16,7 +16,7 @@ class Router
      * @var array $error_routes
      */
     protected $error_routes = [
-        404 => __DIR__ . '\..\views\errors\404.view.php'
+        404 => __DIR__ . '..\..\..\views\errors\404.view.php'
     ];
 
     /**
@@ -58,17 +58,6 @@ class Router
         return $router;
     }
 
-    // /**
-    //  * Define the $routes array
-    //  * @param array $routes Getter for the array of routes 
-    //  * 
-    //  * @return void
-    //  */
-    // public function define($routes): void
-    // {
-    //     $this->routes = $routes;
-    // }
-
     /**
      * Redirect page to the appropriate route (redirrect to error page if route not found)
      * @param string $uri Page uri where the user will be redirected
@@ -77,9 +66,12 @@ class Router
     public function redirect($uri, $request_type)
     {
         if (array_key_exists($uri, $this->routes[$request_type])) {
-            return $this->routes[$request_type][$uri];
+            $controller = new $this->routes[$request_type][$uri][0];
+            $method = $this->routes[$request_type][$uri][1];
+            if (method_exists($controller, $method))
+                return $controller->$method();
         }
-        return $this->error_routes[404];
+        require_once $this->error_routes[404];
     }
 
     /**

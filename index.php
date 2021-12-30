@@ -1,7 +1,7 @@
 <?php
 
-// require_once __DIR__ . '\assets\config.php';
-// require_once __DIR__ . '\assets\functions.php';
+require_once __DIR__ . '\assets\config.php';
+require_once __DIR__ . '\assets\functions.php';
 require_once __DIR__ . '\vendor\autoload.php';
 
 use App\Core\Auth;
@@ -52,9 +52,8 @@ use App\Core\Request;
         </nav>
         <div class="row mt-5 pt-5 d-flex mx-auto w-25">
             <?php
-            require Router::load(ROUTES_FILE)->redirect(Request::uri(), Request::method());
+            echo Router::load(ROUTES_FILE)->redirect(Request::uri(), Request::method());
             ?>
-
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

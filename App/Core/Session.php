@@ -4,6 +4,7 @@ namespace App\Core;
 
 class Session
 {
+    private $name;
     /**
      * Set new session
      * @param string $session_name Session title to be set
@@ -11,7 +12,7 @@ class Session
      * 
      * @return void
      */
-    public static function put($session_name, $session_value): void
+    public function put($session_name, $session_value): void
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

@@ -2,14 +2,16 @@
 
 namespace App\Core;
 
+use App\Core\Session;
 use App\Core\database\Conn;
-use App\Controllers\Controller;
+use App\Core\database\Database;
 
-class Auth extends Controller
+class Auth
 {
     public function __construct()
     {
-        parent::__construct(new Conn(), new Request(), new Router(), new Session(), new Validate());
+        $this->session = new Session();
+        $this->database = new Database();
     }
 
     /**
@@ -42,11 +44,11 @@ class Auth extends Controller
      */
     public static function name()
     {
-        $conn = new Conn;
+        // $conn = new Conn;
+        $database = new Database();
         $id = Session::get('user_id');
         if ($id) {
-            $result = $conn->pdo->query("SELECT name FROM users WHERE id='" . $id . "'");
-            $name = $result->fetch()['name'];
+            $name = $database->getColumn('users', 'name')[0];
             return $name;
         } else {
             return 'Unknown';

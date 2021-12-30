@@ -21,7 +21,7 @@ Session::destroy();
 
 ?>
 
-<form action="actions/user.add.php" method="POST">
+<form action="register" method="POST">
     <div class="mb-3">
         <label for="name" class="form-label">Full Name</label>
         <input type="text" class="form-control" id="name" name="name">
@@ -35,15 +35,15 @@ Session::destroy();
         <input type="password" class="form-control" id="password" name="password">
     </div>
     <?php
-    if ($empty_fields_error != '') { ?>
+    if ($session_error_message != null) { ?>
         <div class="alert alert-danger" role="alert">
-            <?= $empty_fields_error ?>
+            <?= $session_error_message ?>
         </div>
     <?php } ?>
     <?php
-    if ($email_error != '') { ?>
-        <div class="alert alert-danger" role="alert">
-            <?= $email_error ?>
+    if ($session_success_message != null) { ?>
+        <div class="alert alert-success" role="alert">
+            <?= $session_success_message ?>
         </div>
     <?php } ?>
     <div class="mb-3 d-flex justify-content-between">
